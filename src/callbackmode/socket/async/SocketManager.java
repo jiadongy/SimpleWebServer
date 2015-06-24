@@ -32,8 +32,7 @@ public class SocketManager {
     }
 
     public Socket getSocket(Integer hashcode) {
-        Socket socket = this.socketHashMap.get(hashcode);
-        return socket;
+        return this.socketHashMap.get(hashcode);
     }
 
     public void removeSocket(Integer hashcode) {

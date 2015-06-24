@@ -3,8 +3,8 @@ package callbackmode;
 import callbackmode.file.FileManager;
 import callbackmode.http.HttpParserManager;
 import callbackmode.socket.async.SocketManager;
+import util.Configuration;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,13 +23,20 @@ public class ServerEnv {
 
     private ServerEnv() {
     }
-    private ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2);
 
-    private SocketManager socketManager = SocketManager.getInstance();
-    private HttpParserManager httpParserManager = HttpParserManager.getInstance();
-    private FileManager fileManager = FileManager.getInstance();
+    //6.22
+    //之前下面没有static，也就是说在实例化的时候才会执行，但是SocketManager实例化的时候会用到ServerEnv的实例，
+    //但这个时候他的实例还在new当中，所以为null，导致SocketManager实例化时抛出NUllPoint
+    //JVM抛出ExceptionInInitializerError
+    private static ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2);
 
-    private String rootDir = "E:\\Workspace\\SimpleWebServer\\WebRoot";
+    private static SocketManager socketManager = SocketManager.getInstance();
+    private static HttpParserManager httpParserManager = HttpParserManager.getInstance();
+    private static FileManager fileManager = FileManager.getInstance();
+
+    private static String rootDir = "E:\\Workspace\\SimpleWebServer\\WebRoot";
+
+    private static Configuration configuration = new Configuration("E:\\Workspace\\SimpleWebServer\\conf\\server_default.conf");
 
     public static void main(String... args){
         try {
@@ -43,6 +50,10 @@ public class ServerEnv {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     public SocketManager getSocketManager() {

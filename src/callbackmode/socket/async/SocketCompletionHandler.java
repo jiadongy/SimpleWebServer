@@ -35,9 +35,14 @@ public class SocketCompletionHandler implements CompletionHandler<String,Integer
 
     @Override
     public void failed(Throwable exc, Integer hashcode) {
-        socketManager.removeSocket(hashcode);
+        try {
+            socketManager.getSocket(hashcode).close();
+            System.out.println("SocketCompletionHandler:Socket "+hashcode+" Fail to get Result ");
+            socketManager.removeSocket(hashcode);
 
-        System.out.println("SocketCompletionHandler:Socket "+hashcode+" Fail to get Result ");
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }
