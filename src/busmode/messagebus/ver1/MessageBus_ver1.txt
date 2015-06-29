@@ -8,6 +8,9 @@ bus然后找所有订阅此内容的服务并发送，
 然后agent会运行服务指定的回调方法
 这些都是在服务线程中运行的，是单线程的
 
+test：examples.message.NodeOnBusVer1
+
 ver 2.0 idea：
 改成一个服务一个线程
 尽可能减少线程空转的时间
+

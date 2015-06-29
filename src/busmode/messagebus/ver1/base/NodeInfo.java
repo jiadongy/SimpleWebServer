@@ -1,6 +1,6 @@
-package busmode.message.ver1.base;
+package busmode.messagebus.ver1.base;
 
-import busmode.message.ver1.BusAgent;
+import busmode.messagebus.ver1.BusAgent;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,13 +1,13 @@
 package examples.message;
 
-import busmode.message.ver1.BusAgent;
-import busmode.message.ver1.IService;
-import busmode.message.ver1.base.Message;
+import busmode.messagebus.ver1.BusAgent;
+import busmode.messagebus.ver1.IService;
+import busmode.messagebus.ver1.base.Message;
 
 /**
  * Created by Feiyu on 2015/6/27 0027.
  */
-public class NodesOnBus  {
+public class NodesOnBusVer1 {
 
     private class NodeA implements IService{
         private BusAgent agent = new BusAgent(this);
@@ -37,7 +37,7 @@ public class NodesOnBus  {
 
     }
     static public void main(String... args){
-        NodesOnBus test = new NodesOnBus();
+        NodesOnBusVer1 test = new NodesOnBusVer1();
         NodeA a = test.new NodeA();
         NodeB b = test.new NodeB();
         NodeC c = test.new NodeC();

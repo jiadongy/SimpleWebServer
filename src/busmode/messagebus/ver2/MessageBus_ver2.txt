@@ -1,0 +1,9 @@
+20150630
+
+多线程化，使用blockingQueue实现MQ
+Bus只有一个MQ，按照注册信息把Message发到相应Agent的邮箱中
+客户端需要处理不同Message类型
+取Message是阻塞但是用两次取多个，提高处理效率
+
+Attention：
+注意overload是编译时，override是运行时

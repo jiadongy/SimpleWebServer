@@ -1,8 +1,8 @@
-package busmode.message.ver1;
+package busmode.messagebus.ver1;
 
-import busmode.message.ver1.base.Message;
-import busmode.message.ver1.base.NodeInfo;
-import busmode.message.ver1.base.ServiceOption;
+import busmode.messagebus.ver1.base.Message;
+import busmode.messagebus.ver1.base.NodeInfo;
+import busmode.messagebus.ver1.base.ServiceOption;
 
 import java.util.ArrayList;
 import java.util.Iterator;

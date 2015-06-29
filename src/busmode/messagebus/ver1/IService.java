@@ -1,6 +1,6 @@
-package busmode.message.ver1;
+package busmode.messagebus.ver1;
 
-import busmode.message.ver1.base.Message;
+import busmode.messagebus.ver1.base.Message;
 
 /**
  * Created by Feiyu on 2015/6/27 0027.

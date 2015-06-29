@@ -1,4 +1,4 @@
-package busmode.message.ver1.base;
+package busmode.messagebus.ver1.base;
 
 import java.util.ArrayList;
 import java.util.Arrays;
