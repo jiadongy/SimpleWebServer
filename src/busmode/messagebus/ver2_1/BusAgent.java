@@ -7,7 +7,9 @@ import busmode.messagebus.ver2_1.base.ServiceType;
 import util.Pair;
 import util.Utils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -21,7 +23,10 @@ public class BusAgent implements IBusAgent {
     private IBus bus = Bus.getInstance();
     private UUID uuid;
 
-    public BusAgent() {
+    private String agentName;
+
+    public BusAgent(String name) {
+        this.agentName = name;
     }
 
     @Override

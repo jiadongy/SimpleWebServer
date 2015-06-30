@@ -20,7 +20,7 @@ public class NodesOnBusVer2_1 {
 
     private class NodeA {
 
-        private BusAgent agent = new BusAgent();
+        private BusAgent agent = new BusAgent("BusAgentA");
 
         private ExecutorService pool;
 
@@ -66,7 +66,7 @@ public class NodesOnBusVer2_1 {
     }
     private class NodeB {
 
-        private BusAgent agent = new BusAgent();
+        private BusAgent agent = new BusAgent("BusAgentB");
 
         private ExecutorService pool;
 
@@ -112,7 +112,7 @@ public class NodesOnBusVer2_1 {
     }
     private class NodeC {
 
-        private BusAgent agent = new BusAgent();
+        private BusAgent agent = new BusAgent("BusAgentC");
 
         private ExecutorService pool;
 
@@ -161,7 +161,7 @@ public class NodesOnBusVer2_1 {
         NodesOnBusVer2_1 test = new NodesOnBusVer2_1();
         ExecutorService pool = Executors.newCachedThreadPool();
         Bus bus = Bus.getInstance();
-        bus.start();
+
         NodeA a = test.new NodeA(pool);
         NodeB b = test.new NodeB(pool);
         NodeC c = test.new NodeC(pool);
@@ -188,5 +188,6 @@ public class NodesOnBusVer2_1 {
         for(int i=0;i<5;i++)
             c.agent.submit(new SubscribePublishMessage<>("C dada",new ServiceType("B")));
 
+        bus.start();
     }
 }
