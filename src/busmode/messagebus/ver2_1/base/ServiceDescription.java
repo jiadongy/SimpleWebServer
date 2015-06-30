@@ -1,6 +1,6 @@
 package busmode.messagebus.ver2_1.base;
 
-import busmode.messagebus.ver2_1.BusAgent;
+import busmode.messagebus.ver2_1.IBusAgent;
 
 import java.util.UUID;
 
@@ -10,10 +10,10 @@ import java.util.UUID;
 public class ServiceDescription extends ServiceRegisterOption {
 
     private UUID serviceUUID;
-    private BusAgent agent;
+    private IBusAgent agent;
 
     public ServiceDescription(UUID serviceUUID,
-                              BusAgent agnet,
+                              IBusAgent agnet,
                               ServiceRegisterOption option) {
         super(option);
         this.serviceUUID = serviceUUID;
@@ -24,7 +24,7 @@ public class ServiceDescription extends ServiceRegisterOption {
         return serviceUUID;
     }
 
-    public BusAgent getAgent() {
+    public IBusAgent getAgent() {
         return agent;
     }
 

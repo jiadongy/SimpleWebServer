@@ -1,13 +1,13 @@
 package busmode.messagebus.ver2_1;
 
 import busmode.messagebus.ver2_1.base.Message;
-import busmode.messagebus.ver2_1.base.MessageReceiveHandler;
+import busmode.messagebus.ver2_1.base.MessageData;
 import busmode.messagebus.ver2_1.base.ServiceRegisterOption;
+import busmode.messagebus.ver2_1.base.ServiceType;
+import util.Pair;
 import util.Utils;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -18,14 +18,10 @@ public class BusAgent implements IBusAgent {
 
     private BlockingQueue<Message> messageBuffer = new LinkedBlockingQueue<>();
 
-    private IService instance;
     private IBus bus = Bus.getInstance();
     private UUID uuid;
-    private MessageReceiveHandler handler;
 
-    public BusAgent(IService instance, MessageReceiveHandler handler) {
-        this.instance = instance;
-        this.handler = handler;
+    public BusAgent() {
     }
 
     @Override
@@ -61,16 +57,18 @@ public class BusAgent implements IBusAgent {
     }
 
     @Override
-    public void takeMultipleAndProcess(int number)
+    public Collection<Pair<ServiceType, MessageData>> takeMultiple(int number)
             throws InterruptedException {
+        Collection<Pair<ServiceType, MessageData>> results = new LinkedList<>();
         Collection<Message> messages = new LinkedList<>();
         messages.add(messageBuffer.take());
         messageBuffer.drainTo(messages, number - 1);
-        Utils.log("BusAgent: take message size"+messages.size());
+        Utils.log("BusAgent: take message size "+messages.size());
         for(Message message : messages){
-            Utils.log("BusAgent: prepare to process "+message);
-            handler.process(message);
+            results.add(new Pair<>(message.getWhichService(),
+                    message.getData()));
         }
+        return results;
     }
 
 }

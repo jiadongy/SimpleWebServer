@@ -1,4 +1,4 @@
-package busmode.messagebus.ver2_1;
+package busmode.messagebus.ver2_1.base;
 
 import busmode.messagebus.ver1.base.Message;
 

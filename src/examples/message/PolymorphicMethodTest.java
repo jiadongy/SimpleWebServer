@@ -14,7 +14,7 @@ import busmode.messagebus.ver2.base.SubscribePublishMessage;
  * case3表明是根据传入参数的编译时类型确定了调用了哪个Overload方法
  * line23 表明 overload是编译时确定，override是运行时确定！！！
  **/
-public class JavaPolymorphicMethodTest {
+public class PolymorphicMethodTest {
 
     Message message = new SubscribePublishMessage<>("sbm",
             new ServiceType("typeA"));
@@ -44,7 +44,7 @@ public class JavaPolymorphicMethodTest {
     public Handler handler = new Handler();
 
     static public void main(String... args){
-        JavaPolymorphicMethodTest tester = new JavaPolymorphicMethodTest();
+        PolymorphicMethodTest tester = new PolymorphicMethodTest();
 
         //泛型擦除
         Message message = tester.message;

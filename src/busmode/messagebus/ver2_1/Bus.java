@@ -23,11 +23,11 @@ public class Bus implements IBus {
     private BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 
     @Override
-    public UUID register(BusAgent agent,ServiceRegisterOption option){
+    public UUID register(IBusAgent agent,ServiceRegisterOption option){
         boolean isExist = Utils.Lists.innerContains(services, agent,
-                new Utils.Lists.InnerListEqual<ServiceDescription, BusAgent>() {
+                new Utils.Lists.InnerListEqual<ServiceDescription, IBusAgent>() {
                     @Override
-                    public boolean equal(ServiceDescription element, BusAgent obj) {
+                    public boolean equal(ServiceDescription element, IBusAgent obj) {
                         return element.getAgent() == obj;
                     }
                 });
@@ -80,18 +80,12 @@ public class Bus implements IBus {
         messages.add(queue.take());
         queue.drainTo(messages, 9);
         for(Message message : messages){
-            switch (message.getType()){
-                case Subscribe_Publish:
-                    Collection<BusAgent> agents =
-                            getAgentsForSubscribePublishMessage(
-                                    (SubscribePublishMessage)message);
-                    for(BusAgent agent : agents){
-                        agent.receiveMessage(message);
-                        Utils.log("Bus:dispatch send message "+message+" to "+agent);
-                    }
-                    break;
-                default:
-                    Utils.log("Bus:dispatch fail wrong message type");
+            Collection<IBusAgent> agents =
+                    getAgentsForSubscribePublishMessage(
+                            (SubscribePublishMessage)message);
+            for(IBusAgent agent : agents){
+                agent.receiveMessage(message);
+                Utils.log("Bus:dispatch send message "+message+" to "+agent);
             }
         }
 
@@ -125,12 +119,12 @@ public class Bus implements IBus {
         this.busThread.start();
     }
 
-    private Collection<BusAgent> getAgentsForSubscribePublishMessage
+    private Collection<IBusAgent> getAgentsForSubscribePublishMessage
             (SubscribePublishMessage message){
-        ServiceType publishType = message.getPublishType();
-        Collection<BusAgent> result = new ArrayList<>();
+        ServiceType serviceProvided = message.getWhichService();
+        Collection<IBusAgent> result = new ArrayList<>();
         for(ServiceDescription description : services){
-            if(description.getSubscribeTypes().contains(publishType)
+            if(description.getSubscribeTypes().contains(serviceProvided)
                     && !result.contains(description.getAgent())){
                 result.add(description.getAgent());
             }

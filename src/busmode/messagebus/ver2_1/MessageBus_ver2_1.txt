@@ -1,0 +1,14 @@
+20150630
+
+1.将消息的service类型移到父类，这应该是共有的属性，但其他子类
+    不知道还要加什么属性
+2.agent现在返回Pair<ServiceType,MessageData>,
+    client不知道消息，只关注数据
+3.对data封装成MessageData，加了真正数据的class，方便向下转型
+4.去除了Iservice接口
+
+未来改进：
+Bus改成多线程
+agent改为多线程
+改成分布式，
+增加WSDL

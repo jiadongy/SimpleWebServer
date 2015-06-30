@@ -5,37 +5,31 @@ package busmode.messagebus.ver2_1.base;
  */
 public abstract class Message<K> {
 
-    private MessageType type;
+    private ServiceType whichService;
 
-    private K data;
+    private MessageData<K> data;
 
-    private Class<?> dataClass;
-
-    public Message(MessageType type, K data) {
-        this.type = type;
-        this.data = data;
-        this.dataClass = data.getClass();
+    public Message(K data, ServiceType whichService) {
+        this.whichService = whichService;
+        this.data = new MessageData<>(data);
     }
 
     public abstract boolean isValid();
 
-    public MessageType getType() {
-        return type;
-    }
 
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
-    public K getData() {
+    public MessageData getData() {
         return data;
     }
 
-    public void setData(K data) {
+    public void setData(MessageData data) {
         this.data = data;
     }
 
-    public Class<?> getDataClass() {
-        return dataClass;
+    public ServiceType getWhichService() {
+        return whichService;
+    }
+
+    public void setWhichService(ServiceType whichService) {
+        this.whichService = whichService;
     }
 }

@@ -10,7 +10,7 @@ import java.util.UUID;
  **/
 public interface IBus {
 
-    UUID register(BusAgent agent, ServiceRegisterOption option);
+    UUID register(IBusAgent agent, ServiceRegisterOption option);
 
     boolean unregister(UUID uuid);
 

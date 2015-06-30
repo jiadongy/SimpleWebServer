@@ -1,6 +1,5 @@
 package busmode.messagebus.ver2_1.base;
 
-import busmode.messagebus.ver2_1.BroadcastMessage;
 import util.Utils;
 
 /**

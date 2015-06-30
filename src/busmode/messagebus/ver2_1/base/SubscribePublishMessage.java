@@ -5,25 +5,12 @@ package busmode.messagebus.ver2_1.base;
  **/
 public class SubscribePublishMessage<K> extends Message<K> {
 
-
-    private ServiceType publishType;
-
-    public SubscribePublishMessage(K data, ServiceType publishType) {
-        super(MessageType.Subscribe_Publish, data);
-        this.publishType = publishType;
-    }
-
-    public ServiceType getPublishType() {
-        return publishType;
-    }
-
-    public void setPublishType(ServiceType publishType) {
-        this.publishType = publishType;
+    public SubscribePublishMessage(K data ,ServiceType whichService) {
+        super(data,whichService);
     }
 
     @Override
     public boolean isValid() {
-        return publishType != null
-                && getData() != null;
+        return getData() != null;
     }
 }
