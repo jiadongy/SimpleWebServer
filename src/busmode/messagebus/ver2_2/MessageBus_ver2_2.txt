@@ -1,0 +1,6 @@
+20150630
+
+1.修复bug Bus中dispatch只支持发布订阅模式
+    把agent选择移到message中处理，就能支持不同消息的agent选择策略
+
+
