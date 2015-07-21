@@ -40,6 +40,20 @@ Note：Message Router。一个阻塞的实现。进一步包装消息为Event可
 每种消息有不同的筛选目的地的方法，如请求响应指定响应消息必须由请求者接受；订阅发布只需要指定发布者的服务类型，Bus会推送到所有订阅此服务类型消息的BusAgent。
 
 **测试：Bus在不同高并发量场景下消息的延迟**
+
+|8核  60K消息推送的运行时间(误差100ms)  |  ms | |
+| :------------ | :------------ |:------------ |
+| 6 Nodes,10K Message,10 Unit,1 Thread  | 2329  | |
+|  6 Nodes,10K Message,100 Unit,1 Thread |  2191 | |
+| 6 Nodes,10K Message,1K Unit,1 Thread  | 1880  | 合适的单次处理量降低了时间 |
+| 6 Nodes,10K Message,10K Unit,1 Thread  | 1875  | |
+|  6 Nodes,10K Message,100K Unit,1 Thread | 2199  | |
+|5 Nodes,12K Message,1K Unit,2 Thread |  2027  | 增加分发线程并没有明显下降时间|
+
+还要考察下大消息下的吞吐量
+
+阻塞较多，能否考虑协程的使用提高CPU利用率？
+
 VusualVM
 MultithreadedTC
 
