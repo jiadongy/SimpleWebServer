@@ -5,6 +5,7 @@ import util.Utils;
 /**
  * Created by Feiyu on 2015/6/29 0029.
  **/
+@Deprecated
 public abstract class MessageReceiveHandler {
 
     public <U1> U1 process(SubscribePublishMessage message){

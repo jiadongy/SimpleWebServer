@@ -13,9 +13,12 @@ public abstract class Message<K> {
 
     private MessageData<K> data;
 
+    private MessageMetrics metrics;
+
     public Message(K data, ServiceType whichService) {
         this.whichService = whichService;
         this.data = new MessageData<>(data);
+        this.metrics = new MessageMetrics();
     }
 
     public abstract boolean isValid();
@@ -28,15 +31,17 @@ public abstract class Message<K> {
         return data;
     }
 
-    public void setData(MessageData data) {
-        this.data = data;
-    }
 
     public ServiceType getWhichService() {
         return whichService;
     }
 
-    public void setWhichService(ServiceType whichService) {
-        this.whichService = whichService;
+    public void setData(MessageData<K> data) {
+        this.data = data;
     }
+
+    public MessageMetrics getMetrics() {
+        return metrics;
+    }
+
 }

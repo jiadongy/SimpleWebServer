@@ -33,7 +33,7 @@ public class BusAgent implements IBusAgent {
     public boolean register(ServiceRegisterOption option) {
         uuid = bus.register(this, option);
         boolean status = uuid != null;
-        Utils.log("BusAgent:register status: " + status);
+        //Utils.log(agentName+"\tRegister status: " + status);
         return status;
     }
 
@@ -44,7 +44,7 @@ public class BusAgent implements IBusAgent {
             bus.unregister(uuid);
             status = true;
         }
-        Utils.log("BusAgent:register status: " + status);
+        //Utils.log(agentName+"\tUnRegister status: " + status);
         return status;
     }
 
@@ -55,10 +55,12 @@ public class BusAgent implements IBusAgent {
 
     @Override
     public void receiveMessage(Message message) {
-        if (messageBuffer.offer(message))
-            Utils.log("BusAgent:receive success ");
-        else
-            Utils.log("BusAgent:receive fail ");
+        message.getMetrics().setAgentRecieveTime(System.currentTimeMillis());
+        if (messageBuffer.offer(message)) {
+            Utils.log(agentName + "\t" + message + "\t" +
+                    (message.getMetrics().getAgentRecieveTime() - message.getMetrics().getBusRecieveTime()));
+        }//else
+        // Utils.log(agentName+"\tReceive Message fail");
     }
 
     @Override
@@ -68,12 +70,17 @@ public class BusAgent implements IBusAgent {
         Collection<Message> messages = new LinkedList<>();
         messages.add(messageBuffer.take());
         messageBuffer.drainTo(messages, number - 1);
-        Utils.log("BusAgent: take message size " + messages.size());
+        //Utils.log(agentName+"\tTake message size " + messages.size());
         for (Message message : messages) {
             results.add(new Pair<>(message.getWhichService(),
                     message.getData()));
         }
         return results;
+    }
+
+    @Override
+    public String getAgentName() {
+        return agentName;
     }
 
 }

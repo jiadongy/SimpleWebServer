@@ -12,6 +12,7 @@ public class SubscribePublishMessage<K> extends Message<K> {
 
     public SubscribePublishMessage(K data, ServiceType whichService) {
         super(data, whichService);
+        getMetrics().setConstructorTime(System.nanoTime());
     }
 
     @Override

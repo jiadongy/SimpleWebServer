@@ -25,7 +25,7 @@ public class NodesOnBusVer2 {
         private class NodeAHandler extends MessageReceiveHandler{
             @Override
             public Object process(SubscribePublishMessage message) {
-                System.out.println("NodeA Process: type "+message.getPublishType()
+                System.out.println("Node Process: type " + message.getPublishType()
                         +", data "+message.getData());
                 return null;
             }
@@ -36,9 +36,9 @@ public class NodesOnBusVer2 {
             @Override
             public void run() {
                 try {
-                    System.out.println("NodeA start receiving");
+                    System.out.println("Node start receiving");
                     while (true){
-                        System.out.println("NodeA prepare to take message");
+                        System.out.println("Node prepare to take message");
                         agent.takeMultipleAndProcess(10);
                     }
 

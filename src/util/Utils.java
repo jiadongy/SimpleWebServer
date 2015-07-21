@@ -1,5 +1,8 @@
 package util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,8 +35,28 @@ public final class Utils {
         }
     }
 
+    private static File file = new File("screen.log");
+    public static FileWriter writer;
 
-    public static void log(String log){
+    static {
+        try {
+            writer = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean logToFile = true;
+
+
+    public static void log(String log) {
         System.out.println(log);
+        if (logToFile) {
+            try {
+                writer.append(log).append('\n');
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

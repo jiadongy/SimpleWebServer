@@ -37,10 +37,10 @@ public class NodesOnBusVer2_1 {
 
             @Override
             public void run() {
-                System.out.println("NodeA:Process "+collection.size()+" Pairs");
+                System.out.println("Node:Process " + collection.size() + " Pairs");
                 for(Pair<ServiceType,MessageData> pair : collection){
                     System.out.println(
-                            "NodeA:Process "+pair._1()+" : "+
+                            "Node:Process " + pair._1() + " : " +
                       pair._2().getData()+" : "+pair._2().getData().getClass()
                     );
                 }
@@ -52,7 +52,7 @@ public class NodesOnBusVer2_1 {
             public void run() {
 
                 try {
-                    System.out.println("NodeA:Start");
+                    System.out.println("Node:Start");
                     while(true) {
                         Collection<Pair<ServiceType, MessageData>> collection =
                                 agent.takeMultiple(10);

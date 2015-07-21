@@ -19,4 +19,6 @@ public interface IBus {
     void stop();
 
     void start();
+
+    boolean isQueueEmptyAndDispatchStop();
 }

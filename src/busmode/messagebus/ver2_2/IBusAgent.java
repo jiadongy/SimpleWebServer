@@ -23,4 +23,5 @@ public interface IBusAgent {
 
     Collection<Pair<ServiceType, MessageData>> takeMultiple(int number) throws InterruptedException;
 
+    String getAgentName();
 }
